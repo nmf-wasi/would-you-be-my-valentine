@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rose Checker</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                margin: 50px;
+                background-color: black;
+                color: white;
+            }
+
+            #roseVideo {
+                display: none;
+                width: 300px;
+                margin-top: 20px;
+                position: relative;
+            }
+
+            #message {
+                font-size: 20px;
+                color: red;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Enter Your Name</h1>
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <button onclick="checkName()">Submit</button>
+
+        <div id="message"></div>
+        <video id="roseVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
+
+        <script>
+            function checkName() {
+                const name = document.getElementById("nameInput").value.trim();
+                const roseVideo = document.getElementById("roseVideo");
+                const message = document.getElementById("message");
+
+                if (name.toLowerCase() === "moon" || name.toLowerCase() === "moonmoon" || name.toLowerCase() === "munmun" || name.toLowerCase() === "suraiya" || name.toLowerCase() === "mun" || name.toLowerCase() === "") {
+                    roseVideo.style.display = "block";
+                    gsap.fromTo(roseVideo, { opacity: 0, y: 100 }, { opacity: 1, y: 0, duration: 2 });
+                    roseVideo.play();
+                    message.textContent = "";
+                } else {
+                    roseVideo.style.display = "none";
+                    roseVideo.pause();
+                    roseVideo.currentTime = 0;
+                    message.textContent = "Sorry, no rose for you!";
+                }
+            }
+        </script>
+    </body>
+
+</html>
