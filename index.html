@@ -10,15 +10,35 @@
             body {
                 font-family: Arial, sans-serif;
                 text-align: center;
-                margin: 50px;
                 background-color: black;
                 color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                margin: 0;
+            }
+
+            button{
+                margin-top: 10px;
+            }
+
+
+            #roseContainer {
+                display: none;
+                text-align: center;
+            }
+
+            #roseMessage {
+                font-size: 24px;
+                color: pink;
+                margin-bottom: 10px;
             }
 
             #roseVideo {
-                display: none;
-                width: 300px;
-                margin-top: 20px;
+                width: 90vw;
+                max-width: 400px;
                 position: relative;
             }
 
@@ -26,6 +46,10 @@
                 font-size: 20px;
                 color: red;
                 margin-top: 20px;
+            }
+
+            video::-webkit-media-controls {
+                display: none !important;
             }
         </style>
     </head>
@@ -36,21 +60,25 @@
         <button onclick="checkName()">Submit</button>
 
         <div id="message"></div>
-        <video id="roseVideo" src="./roses.mp4" controls></video>
+        <div id="roseContainer">
+            <div id="roseMessage">Here's roses for you 🌹</div>
+            <video id="roseVideo" src="./roses.mp4" autoplay muted loop></video>
+        </div>
 
         <script>
             function checkName() {
                 const name = document.getElementById("nameInput").value.trim();
+                const roseContainer = document.getElementById("roseContainer");
                 const roseVideo = document.getElementById("roseVideo");
                 const message = document.getElementById("message");
 
-                if (name.toLowerCase() === "moon" || name.toLowerCase() === "moonmoon" || name.toLowerCase() === "munmun" || name.toLowerCase() === "suraiya" || name.toLowerCase() === "mun" || name.toLowerCase() === "") {
-                    roseVideo.style.display = "block";
-                    gsap.fromTo(roseVideo, { opacity: 0, y: 100 }, { opacity: 1, y: 0, duration: 2 });
+                if (["moon", "moonmoon", "munmun", "suraiya", "mun", ""].includes(name.toLowerCase())) {
+                    roseContainer.style.display = "block";
+                    gsap.fromTo(roseContainer, { opacity: 0, y: 100 }, { opacity: 1, y: 0, duration: 2 });
                     roseVideo.play();
                     message.textContent = "";
                 } else {
-                    roseVideo.style.display = "none";
+                    roseContainer.style.display = "none";
                     roseVideo.pause();
                     roseVideo.currentTime = 0;
                     message.textContent = "Sorry, no rose for you!";
